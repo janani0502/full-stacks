@@ -1,0 +1,123 @@
+React Attendance Tracker
+ app.jsx
+import React, { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [students, setStudents] = useState([
+    { id: 1, name: "Alice", status: "Absent" },
+    { id: 2, name: "Bob", status: "Absent" },
+    { id: 3, name: "Charlie", status: "Absent" }
+  ]);
+
+  const markStatus = (id, newStatus) => {
+    setStudents(
+      students.map(student =>
+        student.id === id
+          ? { ...student, status: newStatus }
+          : student
+      )
+    );
+  };
+
+  return (
+    <div className="container">
+      <h2>Attendance Tracker</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {students.map(student => (
+            <tr key={student.id}>
+              <td>{student.name}</td>
+              <td
+                className={
+                  student.status === "Present" ? "present" : "absent"
+                }
+              >
+                {student.status}
+              </td>
+              <td>
+                <button
+                  className="present-btn"
+                  onClick={() => markStatus(student.id, "Present")}
+                >
+                  Present
+                </button>
+                <button
+                  className="absent-btn"
+                  onClick={() => markStatus(student.id, "Absent")}
+                >
+                  Absent
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+style.css
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 60%;
+  background: white;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.present {
+  color: green;
+  font-weight: bold;
+}
+
+.absent {
+  color: red;
+  font-weight: bold;
+}
+
+button {
+  margin: 4px;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.present-btn {
+  background-color: #27ae60;
+  color: white;
+}
+
+.absent-btn {
+  background-color: #c0392b;
+  color: white;
+}

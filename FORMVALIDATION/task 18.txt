@@ -1,0 +1,95 @@
+import { useState } from "react";
+
+function App() {
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = () => {
+    const newNotification = `Notification ${notifications.length + 1}`;
+    setNotifications([...notifications, newNotification]);
+  };
+
+  const removeNotification = (index) => {
+    setNotifications(notifications.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2>Dashboard Notifications</h2>
+
+        <p>
+          🔔 Notifications: <strong>{notifications.length}</strong>
+        </p>
+
+        <button onClick={addNotification} style={styles.addBtn}>
+          Add Notification
+        </button>
+
+        <ul style={styles.list}>
+          {notifications.map((note, index) => (
+            <li key={index} style={styles.item}>
+              {note}
+              <button
+                onClick={() => removeNotification(index)}
+                style={styles.removeBtn}
+              >
+                ✖
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(to right, #ff9966, #ff5e62)",
+  },
+  card: {
+    background: "white",
+    padding: "30px",
+    width: "350px",
+    borderRadius: "12px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+    textAlign: "center",
+  },
+  addBtn: {
+    padding: "10px",
+    marginBottom: "15px",
+    background: "#ff5e62",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+  },
+  list: {
+    listStyle: "none",
+    padding: 0,
+  },
+  item: {
+    background: "#f4f4f4",
+    padding: "8px",
+    margin: "8px 0",
+    borderRadius: "6px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  removeBtn: {
+    background: "red",
+    color: "white",
+    border: "none",
+    borderRadius: "50%",
+    cursor: "pointer",
+    width: "25px",
+    height: "25px",
+  },
+};
+
+export default App;

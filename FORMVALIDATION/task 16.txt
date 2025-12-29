@@ -1,0 +1,88 @@
+import { useState } from "react";
+
+function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    // Hardcoded credentials (for demo)
+    const correctUsername = "admin";
+    const correctPassword = "12345";
+
+    if (!username || !password) {
+      alert("❌ Please enter username and password");
+      return;
+    }
+
+    if (username === correctUsername && password === correctPassword) {
+      alert("✅ Login Successful!");
+    } else {
+      alert("❌ Invalid Username or Password");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2>Login</h2>
+
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={styles.input}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={styles.input}
+        />
+
+        <button onClick={handleLogin} style={styles.button}>
+          Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(to right, #667eea, #764ba2)",
+  },
+  card: {
+    background: "white",
+    padding: "30px",
+    width: "300px",
+    borderRadius: "12px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+    textAlign: "center",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+  },
+  button: {
+    width: "100%",
+    padding: "10px",
+    background: "#667eea",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "16px",
+  },
+};
+
+export default App;

@@ -1,0 +1,88 @@
+APP.JSX
+
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [category, setCategory] = useState("electronics");
+
+  const products = {
+    electronics: [
+      { id: 1, name: "Laptop", price: 50000 },
+      { id: 2, name: "Headphones", price: 1500 },
+    ],
+    clothing: [
+      { id: 3, name: "T-Shirt", price: 499 },
+      { id: 4, name: "Jeans", price: 1299 },
+    ],
+  };
+
+  return (
+    <div className="container">
+      <h2>🛒 Product Store</h2>
+
+      {/* Category Navigation */}
+      <nav className="nav">
+        <button onClick={() => setCategory("electronics")}>
+          Electronics
+        </button>
+        <button onClick={() => setCategory("clothing")}>
+          Clothing
+        </button>
+      </nav>
+
+      {/* Product Display */}
+      <div className="product-list">
+        {products[category].map((product) => (
+          <div className="card" key={product.id}>
+            <h3>{product.name}</h3>
+            <p>₹{product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+APP.CSS
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ffecd2, #fcb69f);
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+.nav button {
+  margin: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7f50;
+  color: white;
+  cursor: pointer;
+}
+
+.nav button:hover {
+  background: #ff6347;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,111 @@
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    workshop: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div className="container">
+      {/* Form Card */}
+      <div className="card">
+        <h2>Workshop Registration</h2>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          onChange={handleChange}
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          onChange={handleChange}
+        />
+
+        <select name="workshop" onChange={handleChange}>
+          <option value="">Select Workshop</option>
+          <option value="React Basics">React Basics</option>
+          <option value="MERN Stack">MERN Stack</option>
+          <option value="AI Fundamentals">AI Fundamentals</option>
+        </select>
+
+        <button>Register</button>
+      </div>
+
+      {/* Live Preview Card */}
+      <div className="preview">
+        <h2>Live Preview</h2>
+        <p><strong>Name:</strong> {form.name || "—"}</p>
+        <p><strong>Email:</strong> {form.email || "—"}</p>
+        <p><strong>Workshop:</strong> {form.workshop || "—"}</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+APP.CSS
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px;
+}
+
+.card, .preview {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.card h2, .preview h2 {
+  text-align: center;
+  color: #4b0082;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+.preview p {
+  font-size: 16px;
+  margin: 8px 0;
+}

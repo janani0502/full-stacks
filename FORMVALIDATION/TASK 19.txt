@@ -1,0 +1,121 @@
+APP.JSX
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const addComment = () => {
+    if (comment.trim() === "") {
+      alert("Please enter a comment");
+      return;
+    }
+    setComments([...comments, comment]);
+    setComment("");
+  };
+
+  return (
+    <div className="container">
+      {/* Blog Section */}
+      <div className="blog-card">
+        <h2>🌐 React Blog</h2>
+        <p className="blog-text">
+          React makes it painless to create interactive UIs. Design simple views
+          for each state in your application, and React will efficiently update
+          and render the right components.
+        </p>
+      </div>
+
+      {/* Comment Section */}
+      <div className="comment-card">
+        <h3>💬 Comments</h3>
+
+        <textarea
+          placeholder="Write a comment..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+
+        <button onClick={addComment}>Post Comment</button>
+
+        <ul>
+          {comments.map((c, index) => (
+            <li key={index}>{c}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+APP.CSS
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.blog-card,
+.comment-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-text {
+  line-height: 1.6;
+  color: #333;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+}

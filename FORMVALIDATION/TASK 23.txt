@@ -1,0 +1,88 @@
+import { useState } from "react";
+
+function App() {
+  const [page, setPage] = useState("home");
+
+  const students = [
+    { id: 1, name: "Anushree", dept: "CSE" },
+    { id: 2, name: "Rahul", dept: "IT" },
+    { id: 3, name: "Priya", dept: "AI & DS" },
+  ];
+
+  return (
+    <div style={styles.container}>
+      {/* Navigation */}
+      <div style={styles.nav}>
+        <button onClick={() => setPage("home")}>Home</button>
+        <button onClick={() => setPage("students")}>Students</button>
+        <button onClick={() => setPage("profile")}>Profile</button>
+      </div>
+
+      {/* Pages */}
+      {page === "home" && (
+        <div style={styles.card}>
+          <h2>🏠 Dashboard</h2>
+          <p>Welcome to the Student Dashboard</p>
+        </div>
+      )}
+
+      {page === "students" && (
+        <div style={styles.card}>
+          <h2>👩‍🎓 Student List</h2>
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((s) => (
+                <tr key={s.id}>
+                  <td>{s.id}</td>
+                  <td>{s.name}</td>
+                  <td>{s.dept}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {page === "profile" && (
+        <div style={styles.card}>
+          <h2>👤 Profile</h2>
+          <p>Name: Anushree</p>
+          <p>Department: CSE</p>
+          <p>Year: 3rd Year</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    minHeight: "100vh",
+    background: "linear-gradient(to right, #667eea, #764ba2)",
+    padding: "20px",
+  },
+  nav: {
+    display: "flex",
+    gap: "15px",
+    marginBottom: "20px",
+  },
+  card: {
+    background: "white",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+  },
+};
+
+export default App;

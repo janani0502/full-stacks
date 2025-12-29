@@ -1,0 +1,130 @@
+APP.JSX
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [page, setPage] = useState("dashboard");
+
+  const students = [
+    { id: 1, name: "Anushree", dept: "CSE" },
+    { id: 2, name: "Rahul", dept: "IT" },
+    { id: 3, name: "Priya", dept: "AI & DS" },
+  ];
+
+  return (
+    <div className="container">
+      {/* Navigation */}
+      <nav className="navbar">
+        <button onClick={() => setPage("dashboard")}>Dashboard</button>
+        <button onClick={() => setPage("students")}>Students</button>
+        <button onClick={() => setPage("about")}>About</button>
+      </nav>
+
+      {/* Content */}
+      <div className="content">
+        {page === "dashboard" && (
+          <div>
+            <h2>📊 Dashboard</h2>
+            <p>Total Students: {students.length}</p>
+          </div>
+        )}
+
+        {page === "students" && (
+          <div>
+            <h2>👩‍🎓 Student List</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Department</th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((s) => (
+                  <tr key={s.id}>
+                    <td>{s.id}</td>
+                    <td>{s.name}</td>
+                    <td>{s.dept}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {page === "about" && (
+          <div>
+            <h2>ℹ️ About</h2>
+            <p>This is a simple Student Management Dashboard built using React.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+ APP.CSS
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+.container {
+  min-height: 100vh;
+}
+
+.navbar {
+  background: #2d2f8b;
+  padding: 10px;
+  text-align: center;
+}
+
+.navbar button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.navbar button:hover {
+  background: #ddd;
+}
+
+.content {
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  width: 80%;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #667eea;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .content {
+    width: 95%;
+  }
+}
